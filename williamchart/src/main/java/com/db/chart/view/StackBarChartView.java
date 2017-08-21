@@ -145,18 +145,15 @@ public class StackBarChartView extends BaseStackBarChartView {
                                     style.barPaint);
                         }
 
+                        //Patch bottom corners
+                        cornersPatch = (currBottomY - y1) / 2;
+                        canvas.drawRect(new Rect((int) x0, (int) (currBottomY - cornersPatch), (int) x1,
+                                (int) currBottomY), style.barPaint);
+
                         if (style.hasBarBorder) {
                             if (bottomSetIndex != topSetIndex && style.cornerRadius != 0) {
                                 canvas.drawLine((int) x0, (int) currBottomY, (int) x0, (int) y1, style.barBorderPaint);
                                 canvas.drawLine((int) x1, (int) currBottomY, (int) x1, (int) y1, style.barBorderPaint);
-                            } else {
-                                // TODO
-                                path = new Path();
-                                path.moveTo((int) x0, (int) currBottomY);
-                                path.lineTo((int) x0, (int) (y1 - style.cornerRadius ));
-                                RectF topLeftRect = new RectF((int) x0, (int) y1, (int) (x0 + style.cornerRadius), (int) (y1 - style.cornerRadius));
-                                path.arcTo(topLeftRect, 0, ANGLE);
-                                canvas.drawPath(path, style.barBorderPaint);
                             }
                         }
 
@@ -169,12 +166,12 @@ public class StackBarChartView extends BaseStackBarChartView {
 
                         path = new Path();
                         path.moveTo((int) x0, (int) currBottomY);
-                        path.lineTo((int) x0, (int) (y1 + style.cornerRadius * 2 ));
-                        RectF topLeftRect = new RectF((int) (x0 + style.cornerRadius * 2), (int) y1, (int) (x0 + style.cornerRadius * 2), (int) y1);
-                        path.arcTo(topLeftRect, -ANGLE, 0);
-                        path.lineTo((int) (x1 - style.cornerRadius * 2), (int) y1);
-                        RectF topRightRect = new RectF((int) x1, (int) (y1 + style.cornerRadius * 2), (int) x1, (int) (y1 + style.cornerRadius * 2));
-                        path.arcTo(topRightRect, 0, ANGLE);
+                        path.lineTo((int) x0, (int) (y1 + style.cornerRadius));
+                        RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + style.cornerRadius), (int) (y1 + style.cornerRadius) );
+                        path.arcTo(topLeftRect, 180, 90);
+                        path.lineTo((int) (x1 - style.cornerRadius), (int) y1);
+                        RectF topRightRect = new RectF((int) (x1 - style.cornerRadius), (int) (y1), (int) x1, (int) (y1 + style.cornerRadius));
+                        path.arcTo(topRightRect, 270, 90);
                         path.lineTo((int) x1, (int) currBottomY);
                         canvas.drawPath(path, style.barBorderPaint);
 

@@ -75,7 +75,7 @@
             android:paddingRight="8dp"
             williamchart:chart_axis="false"
             williamchart:chart_barSpacing="15dp"
-            williamchart:chart_cornerRadius="1dp"
+            williamchart:chart_cornerRadius="20dp"
             williamchart:chart_fontSize="10sp"
             williamchart:chart_labelColor="#929b88" />
     </RelativeLayout>
