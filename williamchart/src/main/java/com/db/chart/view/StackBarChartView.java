@@ -169,11 +169,11 @@ public class StackBarChartView extends BaseStackBarChartView {
 
                         path = new Path();
                         path.moveTo((int) x0, (int) currBottomY);
-                        path.lineTo((int) x0, (int) (y1 + style.cornerRadius ));
-                        RectF topLeftRect = new RectF((int) x0, (int) y1, (int) (x0 + style.cornerRadius), (int) (y1 + style.cornerRadius));
-                        path.arcTo(topLeftRect, 0, ANGLE);
-                        path.lineTo((int) (x1 - style.cornerRadius), (int) y1);
-                        RectF topRightRect = new RectF((int) (x1 - style.cornerRadius), (int) y1, (int) x1, (int) (y1 + style.cornerRadius));
+                        path.lineTo((int) x0, (int) (y1 + style.cornerRadius * 2 ));
+                        RectF topLeftRect = new RectF((int) (x0 + style.cornerRadius * 2), (int) y1, (int) (x0 + style.cornerRadius * 2), (int) y1);
+                        path.arcTo(topLeftRect, -ANGLE, 0);
+                        path.lineTo((int) (x1 - style.cornerRadius * 2), (int) y1);
+                        RectF topRightRect = new RectF((int) x1, (int) (y1 + style.cornerRadius * 2), (int) x1, (int) (y1 + style.cornerRadius * 2));
                         path.arcTo(topRightRect, 0, ANGLE);
                         path.lineTo((int) x1, (int) currBottomY);
                         canvas.drawPath(path, style.barBorderPaint);

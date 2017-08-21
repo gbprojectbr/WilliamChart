@@ -47,8 +47,8 @@ public class StackedCardOne extends CardController {
 
     private final float[][] mValuesOne =
             {{30f, 40f, 25f, 25f},
-                    {30f, 30f, 25f, 40f},
-                    {30f, 30f, 25f, 25f}};
+                    {35f, 30f, 20f, 40f},
+                    {20f, 50f, 30f, 25f}};
 
 
     public StackedCardOne(CardView card) {
@@ -128,21 +128,21 @@ public class StackedCardOne extends CardController {
         BarSet stackBarSet = new BarSet(mLabels, mValuesOne[0]);
         stackBarSet.setColor(Color.parseColor("#a1d949"));
         for (ChartEntry entry : stackBarSet.getEntries()) {
-            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(0.5f));
+            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(1f));
         }
         mChart.addData(stackBarSet);
 
         stackBarSet = new BarSet(mLabels, mValuesOne[1]);
         stackBarSet.setColor(Color.parseColor("#ffcc6a"));
         for (ChartEntry entry : stackBarSet.getEntries()) {
-            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(0.5f));
+            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(1f));
         }
         mChart.addData(stackBarSet);
 
         stackBarSet = new BarSet(mLabels, mValuesOne[2]);
         stackBarSet.setColor(Color.parseColor("#ffffff"));
         for (ChartEntry entry : stackBarSet.getEntries()) {
-            ((Bar) entry).setBorder(Color.parseColor("#ff7a57"), Tools.fromDpToPx(0.5f));
+            ((Bar) entry).setBorder(Color.parseColor("#ff7a57"), Tools.fromDpToPx(1f));
         }
         mChart.addData(stackBarSet);
 
