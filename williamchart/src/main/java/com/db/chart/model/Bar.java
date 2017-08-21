@@ -35,6 +35,12 @@ public class Bar extends ChartEntry {
 
     private float[] mGradientPositions;
 
+    private boolean mHasBorder;
+
+    private int mBorderColor;
+
+    private float mBorderWidth;
+
 
     public Bar(String label, float value) {
 
@@ -42,6 +48,8 @@ public class Bar extends ChartEntry {
 
         isVisible = true;
         mHasGradientColor = false;
+        mHasBorder = false;
+        mBorderWidth = 0;
     }
 
 
@@ -85,6 +93,38 @@ public class Bar extends ChartEntry {
         return mGradientPositions;
     }
 
+    /**
+     * Retrieve the color of the border of bar's fill.
+     * Border fill property must have been previously defined.
+     *
+     * @return Border color.
+     */
+    public int getBorderColor() {
+
+        return mBorderColor;
+    }
+
+    /**
+     * Retrieve the width of the border of bar's fill.
+     * Border fill property must have been previously defined.
+     *
+     * @return Border width.
+     */
+    public float getBorderWidth() {
+
+        return mBorderWidth;
+    }
+
+    /**
+     * If bar has border defined.
+     *
+     * @return true if border property defined.
+     */
+    public boolean hasBorder() {
+
+        return mHasBorder;
+    }
+
 
 	/*
      * -------------
@@ -107,6 +147,21 @@ public class Bar extends ChartEntry {
         mHasGradientColor = true;
         mGradientColors = checkNotNull(colors);
         mGradientPositions = positions;
+        return this;
+    }
+
+    /**
+     * Set border to fill of the {@link com.db.chart.model.Bar}.
+     *
+     * @param color The color of the border
+     * @param width The width in pixels of the border
+     * @return {@link com.db.chart.model.Bar} self-reference.
+     */
+    public Bar setBorder(@NonNull int color, @NonNull float width) {
+
+        mHasBorder = true;
+        mBorderWidth = width;
+        mBorderColor = color;
         return this;
     }
 

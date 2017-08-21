@@ -112,6 +112,21 @@ public abstract class BaseBarChartView extends ChartView {
                 style.cornerRadius, style.cornerRadius, style.barPaint);
     }
 
+    /**
+     * Draws the border of a bar.
+     *
+     * @param canvas {@link android.graphics.Canvas} used to draw the background
+     * @param left   The X coordinate of the left side of the rectangle
+     * @param top    The Y coordinate of the top of the rectangle
+     * @param right  The X coordinate of the right side of the rectangle
+     * @param bottom The Y coordinate of the bottom of the rectangle
+     */
+    void drawBarBorder(Canvas canvas, float left, float top, float right, float bottom) {
+        canvas.drawRoundRect(
+                new RectF(Math.round(left), Math.round(top), Math.round(right), Math.round(bottom)),
+                style.cornerRadius, style.cornerRadius, style.barBorderPaint);
+    }
+
 
     /**
      * Draws the background (not the fill) of a bar, the one behind the bar.
@@ -222,6 +237,13 @@ public abstract class BaseBarChartView extends ChartView {
         Paint barPaint;
 
         /**
+         * Bar border variables
+         */
+        Paint barBorderPaint;
+
+        boolean hasBarBorder;
+
+        /**
          * Spacing between bars
          */
         float barSpacing;
@@ -245,6 +267,7 @@ public abstract class BaseBarChartView extends ChartView {
 
             mBarBackgroundColor = DEFAULT_COLOR;
             hasBarBackground = false;
+            hasBarBorder = false;
 
             barSpacing = getResources().getDimension(R.dimen.bar_spacing);
             setSpacing = getResources().getDimension(R.dimen.set_spacing);
@@ -274,12 +297,16 @@ public abstract class BaseBarChartView extends ChartView {
             barBackgroundPaint = new Paint();
             barBackgroundPaint.setColor(mBarBackgroundColor);
             barBackgroundPaint.setStyle(Paint.Style.FILL);
+
+            barBorderPaint = new Paint();
+            barBorderPaint.setStyle(Paint.Style.STROKE);
         }
 
         private void clean() {
 
             barPaint = null;
             barBackgroundPaint = null;
+            barBorderPaint = null;
         }
 
     }
