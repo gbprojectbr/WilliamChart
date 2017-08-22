@@ -151,9 +151,26 @@ public class StackBarChartView extends BaseStackBarChartView {
                                 (int) currBottomY), style.barPaint);
 
                         if (style.hasBarBorder) {
+
+                            // Single graph - no round needed.
                             if (bottomSetIndex != topSetIndex && style.cornerRadius != 0) {
                                 canvas.drawLine((int) x0, (int) currBottomY, (int) x0, (int) y1, style.barBorderPaint);
                                 canvas.drawLine((int) x1, (int) currBottomY, (int) x1, (int) y1, style.barBorderPaint);
+                            } else {
+                                path = new Path();
+                                float currCornerRadius = style.cornerRadius;
+                                if (currCornerRadius + y1 > currBottomY) {
+                                    currCornerRadius = ( currBottomY - y1 ) / 2;
+                                }
+                                path.moveTo((int) x0, (int) currBottomY);
+                                path.lineTo((int) x0, (int) (y1 + currCornerRadius));
+                                RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + currCornerRadius * 2), (int) (y1 + currCornerRadius * 2));
+                                path.arcTo(topLeftRect, 180, 90);
+                                path.lineTo((int) (x1 - currCornerRadius), (int) y1);
+                                RectF topRightRect = new RectF((int) (x1 - currCornerRadius * 2), (int) (y1), (int) x1, (int) (y1 + currCornerRadius * 2));
+                                path.arcTo(topRightRect, 270, 90);
+                                path.lineTo((int) x1, (int) currBottomY);
+                                canvas.drawPath(path, style.barBorderPaint);
                             }
                         }
 
@@ -164,16 +181,22 @@ public class StackBarChartView extends BaseStackBarChartView {
                         canvas.drawRect(new Rect((int) x0, (int) (currBottomY - cornersPatch), (int) x1,
                                 (int) currBottomY), style.barPaint);
 
-                        path = new Path();
-                        path.moveTo((int) x0, (int) currBottomY);
-                        path.lineTo((int) x0, (int) (y1 + style.cornerRadius));
-                        RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + style.cornerRadius), (int) (y1 + style.cornerRadius) );
-                        path.arcTo(topLeftRect, 180, 90);
-                        path.lineTo((int) (x1 - style.cornerRadius), (int) y1);
-                        RectF topRightRect = new RectF((int) (x1 - style.cornerRadius), (int) (y1), (int) x1, (int) (y1 + style.cornerRadius));
-                        path.arcTo(topRightRect, 270, 90);
-                        path.lineTo((int) x1, (int) currBottomY);
-                        canvas.drawPath(path, style.barBorderPaint);
+                        if (style.hasBarBorder) {
+                            path = new Path();
+                            float currCornerRadius = style.cornerRadius;
+                            if (currCornerRadius + y1 > currBottomY) {
+                                currCornerRadius = ( currBottomY - y1 ) / 2;
+                            }
+                            path.moveTo((int) x0, (int) currBottomY);
+                            path.lineTo((int) x0, (int) (y1 + currCornerRadius * 2));
+                            RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + ((int) currCornerRadius) * 2), (int) (y1 + ((int) currCornerRadius) * 2));
+                            path.arcTo(topLeftRect, 180, 90);
+                            path.lineTo((int) (x1 - ((int) currCornerRadius) * 2), (int) y1);
+                            RectF topRightRect = new RectF((int) (x1 - ((int) currCornerRadius) * 2), (int) y1, (int) x1, (int) (y1 + ((int) currCornerRadius) * 2));
+                            path.arcTo(topRightRect, 270, 90);
+                            path.lineTo((int) x1, (int) currBottomY);
+                            canvas.drawPath(path, style.barBorderPaint);
+                        }
 
                     } else { // if(j != bottomSetIndex && j != topSetIndex) { // Middle sets
                         canvas.drawRect(new Rect((int) x0, (int) y1, (int) x1, (int) currBottomY),

@@ -34,21 +34,21 @@ public class StackedCardOne extends CardController {
 
     private final StackBarChartView mChart;
 
-//    private final String[] mLabels =
-//            {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"};
-
     private final String[] mLabels =
-            {"JAN", "FEV", "MAR", "ABR"};
+            {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"};
 
-//    private final float[][] mValuesOne =
-//            {{30f, 40f, 25f, 25f, 40f, 25f, 25f, 30f, 30f, 25f, 40f, 25f},
-//                    {30f, 30f, 25f, 40f, 25f, 30f, 40f, 30f, 30f, 25f, 25f, 25f},
-//                    {30f, 30f, 25f, 25f, 25f, 25f, 25f, 30f, 40f, 25, 25, 40f}};
+//    private final String[] mLabels =
+//            {"JAN", "FEV", "MAR", "ABR"};
 
     private final float[][] mValuesOne =
-            {{30f, 40f, 25f, 25f},
-                    {35f, 30f, 20f, 40f},
-                    {20f, 50f, 30f, 25f}};
+            {{30f, 40f, 0f, 0f, 40f, 0f, 25f, 30f, 30f, 25f, 40f, 25f},
+                    {30f, 0f, 0f, 40f, 25f, 30f, 0f, 30f, 30f, 25f, 25f, 25f},
+                    {30f, 0f, 25f, 0f, 25f, 25f, 25f, 0f, 40f, 25, 25, 40f}};
+
+//    private final float[][] mValuesOne =
+//            {{30f, 40f, 25f, 25f},
+//                    {35f, 30f, 20f, 40f},
+//                    {20f, 50f, 30f, 25f}};
 
 
     public StackedCardOne(CardView card) {
@@ -128,14 +128,14 @@ public class StackedCardOne extends CardController {
         BarSet stackBarSet = new BarSet(mLabels, mValuesOne[0]);
         stackBarSet.setColor(Color.parseColor("#a1d949"));
         for (ChartEntry entry : stackBarSet.getEntries()) {
-            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(1f));
+            ((Bar) entry).setBorder(Color.parseColor("#ff7a57"), Tools.fromDpToPx(1f));
         }
         mChart.addData(stackBarSet);
 
         stackBarSet = new BarSet(mLabels, mValuesOne[1]);
         stackBarSet.setColor(Color.parseColor("#ffcc6a"));
         for (ChartEntry entry : stackBarSet.getEntries()) {
-            ((Bar) entry).setBorder(Color.parseColor("#000000"), Tools.fromDpToPx(1f));
+            ((Bar) entry).setBorder(Color.parseColor("#ff7a57"), Tools.fromDpToPx(1f));
         }
         mChart.addData(stackBarSet);
 
