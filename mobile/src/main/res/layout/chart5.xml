@@ -3,7 +3,7 @@
                                     xmlns:williamchart="http://schemas.android.com/apk/res-auto"
                                     android:id="@+id/chart_card"
                                     android:layout_width="match_parent"
-                                    android:layout_height="372dp"
+                                    android:layout_height="300dp"
                                     android:layout_margin="@dimen/card_view_padding"
                                     williamchart:cardBackgroundColor="#ffffff"
                                     williamchart:cardCornerRadius="@dimen/card_view_roundcorner">
@@ -74,7 +74,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                
+
                 <com.db.chart.view.StackBarChartView
                     android:id="@+id/chart"
                     android:layout_width="982dp"

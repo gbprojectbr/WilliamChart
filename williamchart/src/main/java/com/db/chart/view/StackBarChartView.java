@@ -157,20 +157,7 @@ public class StackBarChartView extends BaseStackBarChartView {
                                 canvas.drawLine((int) x0, (int) currBottomY, (int) x0, (int) y1, style.barBorderPaint);
                                 canvas.drawLine((int) x1, (int) currBottomY, (int) x1, (int) y1, style.barBorderPaint);
                             } else {
-                                path = new Path();
-                                float currCornerRadius = style.cornerRadius;
-                                if (currCornerRadius + y1 > currBottomY) {
-                                    currCornerRadius = ( currBottomY - y1 ) / 2;
-                                }
-                                path.moveTo((int) x0, (int) currBottomY);
-                                path.lineTo((int) x0, (int) (y1 + currCornerRadius));
-                                RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + currCornerRadius * 2), (int) (y1 + currCornerRadius * 2));
-                                path.arcTo(topLeftRect, 180, 90);
-                                path.lineTo((int) (x1 - currCornerRadius), (int) y1);
-                                RectF topRightRect = new RectF((int) (x1 - currCornerRadius * 2), (int) (y1), (int) x1, (int) (y1 + currCornerRadius * 2));
-                                path.arcTo(topRightRect, 270, 90);
-                                path.lineTo((int) x1, (int) currBottomY);
-                                canvas.drawPath(path, style.barBorderPaint);
+                                drawBorder(canvas, x0, currBottomY, x1, y1);
                             }
                         }
 
@@ -182,18 +169,7 @@ public class StackBarChartView extends BaseStackBarChartView {
                                 (int) currBottomY), style.barPaint);
 
                         if (style.hasBarBorder) {
-                            path = new Path();
-                            float currCornerRadius = style.cornerRadius;
-                            if (currCornerRadius + y1 > currBottomY) {
-                                currCornerRadius = ( currBottomY - y1 ) / 2;
-                            }
-                            path.moveTo((int) x0, (int) currBottomY);
-                            RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + ((int) currCornerRadius) * 2), (int) (y1 + ((int) currCornerRadius) * 2));
-                            RectF topRightRect = new RectF((int) (x1 - ((int) currCornerRadius) * 2), (int) y1, (int) x1, (int) (y1 + ((int) currCornerRadius) * 2));
-                            path.arcTo(topLeftRect, 180, 90);
-                            path.arcTo(topRightRect, 270, 90);
-                            path.lineTo((int) x1, (int) currBottomY);
-                            canvas.drawPath(path, style.barBorderPaint);
+                            drawBorder(canvas, x0, currBottomY, x1, y1);
                         }
 
                     } else { // if(j != bottomSetIndex && j != topSetIndex) { // Middle sets
@@ -245,6 +221,22 @@ public class StackBarChartView extends BaseStackBarChartView {
                 }
             }
         }
+    }
+
+    private void drawBorder(Canvas canvas, float x0, float y0, float x1, float y1) {
+        Path path;
+        path = new Path();
+        float cornerRadius = style.cornerRadius;
+        if (cornerRadius + y1 > y0) {
+            cornerRadius = ( y0 - y1 ) / 2;
+        }
+        path.moveTo((int) x0, (int) y0);
+        RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + ((int) cornerRadius) * 2), (int) (y1 + ((int) cornerRadius) * 2));
+        RectF topRightRect = new RectF((int) (x1 - ((int) cornerRadius) * 2), (int) y1, (int) x1, (int) (y1 + ((int) cornerRadius) * 2));
+        path.arcTo(topLeftRect, 180, 90);
+        path.arcTo(topRightRect, 270, 90);
+        path.lineTo((int) x1, (int) y0);
+        canvas.drawPath(path, style.barBorderPaint);
     }
 
     @Override
