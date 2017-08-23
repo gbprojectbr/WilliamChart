@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:williamchart="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/chart_card"
-    android:layout_width="match_parent"
-    android:layout_height="175dp"
-    android:layout_margin="@dimen/card_view_padding"
-    williamchart:cardBackgroundColor="#ffffff"
-    williamchart:cardCornerRadius="@dimen/card_view_roundcorner">
+                                    xmlns:williamchart="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/chart_card"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="372dp"
+                                    android:layout_margin="@dimen/card_view_padding"
+                                    williamchart:cardBackgroundColor="#ffffff"
+                                    williamchart:cardCornerRadius="@dimen/card_view_roundcorner">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,19 +64,32 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-        <com.db.chart.view.StackBarChartView
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/legend"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            williamchart:chart_axis="false"
-            williamchart:chart_barSpacing="15dp"
-            williamchart:chart_cornerRadius="4dp"
-            williamchart:chart_fontSize="10sp"
-            williamchart:chart_labelColor="#929b88" />
+            android:fillViewport="true"
+            android:layout_alignParentBottom="true">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                
+                <com.db.chart.view.StackBarChartView
+                    android:id="@+id/chart"
+                    android:layout_width="982dp"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    williamchart:chart_axis="false"
+                    williamchart:chart_barSpacing="15dp"
+                    williamchart:chart_cornerRadius="4dp"
+                    williamchart:chart_fontSize="10sp"
+                    williamchart:chart_labelColor="#929b88" />
+            </FrameLayout>
+
+        </HorizontalScrollView>
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

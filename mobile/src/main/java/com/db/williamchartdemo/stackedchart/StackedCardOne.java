@@ -147,9 +147,11 @@ public class StackedCardOne extends CardController {
         mChart.addData(stackBarSet);
 
         int[] order = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+//        float threshold = 89.f;
+        float threshold = 0;
         mChart.setXLabels(XRenderer.LabelPosition.OUTSIDE)
                 .setYLabels(YRenderer.LabelPosition.NONE)
-                .setValueThreshold(89.f, 89.f, thresPaint)
+                .setValueThreshold(threshold, threshold, thresPaint)
                 .show(new Animation().inSequence(.5f, order).withEndAction(action));
     }
 
