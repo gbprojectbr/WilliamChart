@@ -18,7 +18,9 @@ package com.db.chart.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.AttributeSet;
 
@@ -114,6 +116,14 @@ public class StackBarChartView extends BaseStackBarChartView {
                 applyShadow(style.barPaint, barSet.getAlpha(), bar.getShadowDx(), bar
                         .getShadowDy(), bar.getShadowRadius(), bar.getShadowColor());
 
+                if (bar.hasBorder()) {
+                    style.barBorderPaint.setColor(bar.getBorderColor());
+                    style.barBorderPaint.setStrokeWidth(bar.getBorderWidth());
+                    style.hasBarBorder = true;
+                } else {
+                    style.hasBarBorder = false;
+                }
+
                 x0 = (bar.getX() - barWidth / 2);
                 x1 = (bar.getX() + barWidth / 2);
 
@@ -132,6 +142,22 @@ public class StackBarChartView extends BaseStackBarChartView {
                                     style.barPaint);
                         }
 
+                        //Patch bottom corners
+                        cornersPatch = (currBottomY - y1) / 2;
+                        canvas.drawRect(new Rect((int) x0, (int) (currBottomY - cornersPatch), (int) x1,
+                                (int) currBottomY), style.barPaint);
+
+                        if (style.hasBarBorder) {
+
+                            // Single graph - no round needed.
+                            if (bottomSetIndex != topSetIndex && style.cornerRadius != 0) {
+                                canvas.drawLine((int) x0, (int) currBottomY, (int) x0, (int) y1, style.barBorderPaint);
+                                canvas.drawLine((int) x1, (int) currBottomY, (int) x1, (int) y1, style.barBorderPaint);
+                            } else {
+                                drawBorder(canvas, x0, currBottomY, x1, y1);
+                            }
+                        }
+
                     } else if (j == topSetIndex) {
                         drawBar(canvas, (int) x0, (int) y1, (int) x1, (int) currBottomY);
                         // Patch bottom corners of bar
@@ -139,9 +165,17 @@ public class StackBarChartView extends BaseStackBarChartView {
                         canvas.drawRect(new Rect((int) x0, (int) (currBottomY - cornersPatch), (int) x1,
                                 (int) currBottomY), style.barPaint);
 
+                        if (style.hasBarBorder) {
+                            drawBorder(canvas, x0, currBottomY, x1, y1);
+                        }
+
                     } else { // if(j != bottomSetIndex && j != topSetIndex) { // Middle sets
                         canvas.drawRect(new Rect((int) x0, (int) y1, (int) x1, (int) currBottomY),
                                 style.barPaint);
+                        if (style.hasBarBorder) {
+                            canvas.drawLine((int) x0, (int) currBottomY, (int) x0, (int) y1, style.barBorderPaint);
+                            canvas.drawLine((int) x1, (int) currBottomY, (int) x1, (int) y1, style.barBorderPaint);
+                        }
                     }
 
                     currBottomY = y1;
@@ -184,6 +218,22 @@ public class StackBarChartView extends BaseStackBarChartView {
                 }
             }
         }
+    }
+
+    private void drawBorder(Canvas canvas, float x0, float y0, float x1, float y1) {
+        Path path;
+        path = new Path();
+        float cornerRadius = style.cornerRadius;
+        if (cornerRadius + y1 > y0) {
+            cornerRadius = ( y0 - y1 ) / 2;
+        }
+        path.moveTo((int) x0, (int) y0);
+        RectF topLeftRect = new RectF((int) (x0), (int) y1, (int) (x0 + ((int) cornerRadius) * 2), (int) (y1 + ((int) cornerRadius) * 2));
+        RectF topRightRect = new RectF((int) (x1 - ((int) cornerRadius) * 2), (int) y1, (int) x1, (int) (y1 + ((int) cornerRadius) * 2));
+        path.arcTo(topLeftRect, 180, 90);
+        path.arcTo(topRightRect, 270, 90);
+        path.lineTo((int) x1, (int) y0);
+        canvas.drawPath(path, style.barBorderPaint);
     }
 
     @Override

@@ -222,6 +222,13 @@ public abstract class BaseBarChartView extends ChartView {
         Paint barPaint;
 
         /**
+         * Bar border variables
+         */
+        Paint barBorderPaint;
+
+        boolean hasBarBorder;
+
+        /**
          * Spacing between bars
          */
         float barSpacing;
@@ -245,6 +252,7 @@ public abstract class BaseBarChartView extends ChartView {
 
             mBarBackgroundColor = DEFAULT_COLOR;
             hasBarBackground = false;
+            hasBarBorder = false;
 
             barSpacing = getResources().getDimension(R.dimen.bar_spacing);
             setSpacing = getResources().getDimension(R.dimen.set_spacing);
@@ -274,12 +282,16 @@ public abstract class BaseBarChartView extends ChartView {
             barBackgroundPaint = new Paint();
             barBackgroundPaint.setColor(mBarBackgroundColor);
             barBackgroundPaint.setStyle(Paint.Style.FILL);
+
+            barBorderPaint = new Paint();
+            barBorderPaint.setStyle(Paint.Style.STROKE);
         }
 
         private void clean() {
 
             barPaint = null;
             barBackgroundPaint = null;
+            barBorderPaint = null;
         }
 
     }
