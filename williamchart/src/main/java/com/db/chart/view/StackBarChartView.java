@@ -36,8 +36,6 @@ import java.util.ArrayList;
  */
 public class StackBarChartView extends BaseStackBarChartView {
 
-    static final int ANGLE = 90;
-
     public StackBarChartView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
@@ -73,7 +71,6 @@ public class StackBarChartView extends BaseStackBarChartView {
         float cornersPatch;
         BarSet barSet;
         Bar bar;
-        Path path;
         int dataSize = data.size();
         int setSize = data.get(0).size();
         float zeroPosition = this.getZeroPosition();

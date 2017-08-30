@@ -37,18 +37,10 @@ public class StackedCardOne extends CardController {
     private final String[] mLabels =
             {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"};
 
-//    private final String[] mLabels =
-//            {"JAN", "FEV", "MAR", "ABR"};
-
     private final float[][] mValuesOne =
             {{30f, 40f, 0f, 0f, 40f, 0f, 25f, 30f, 30f, 25f, 40f, 25f},
                     {30f, 0f, 0f, 40f, 25f, 30f, 0f, 30f, 30f, 25f, 25f, 25f},
                     {30f, 0f, 25f, 0f, 25f, 25f, 25f, 0f, 40f, 25, 25, 40f}};
-
-//    private final float[][] mValuesOne =
-//            {{30f, 40f, 25f, 25f},
-//                    {35f, 30f, 20f, 40f},
-//                    {20f, 50f, 30f, 25f}};
 
 
     public StackedCardOne(CardView card) {
@@ -147,7 +139,6 @@ public class StackedCardOne extends CardController {
         mChart.addData(stackBarSet);
 
         int[] order = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-//        float threshold = 89.f;
         float threshold = 0;
         mChart.setXLabels(XRenderer.LabelPosition.OUTSIDE)
                 .setYLabels(YRenderer.LabelPosition.NONE)

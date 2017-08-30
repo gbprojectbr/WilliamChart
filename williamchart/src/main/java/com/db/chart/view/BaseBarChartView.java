@@ -19,7 +19,6 @@ package com.db.chart.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.ColorInt;
@@ -111,21 +110,6 @@ public abstract class BaseBarChartView extends ChartView {
         canvas.drawRoundRect(
                 new RectF(Math.round(left), Math.round(top), Math.round(right), Math.round(bottom)),
                 style.cornerRadius, style.cornerRadius, style.barPaint);
-    }
-
-    /**
-     * Draws the border of a bar.
-     *
-     * @param canvas {@link android.graphics.Canvas} used to draw the background
-     * @param left   The X coordinate of the left side of the rectangle
-     * @param top    The Y coordinate of the top of the rectangle
-     * @param right  The X coordinate of the right side of the rectangle
-     * @param bottom The Y coordinate of the bottom of the rectangle
-     */
-    void drawBarBorder(Canvas canvas, float left, float top, float right, float bottom) {
-        canvas.drawRoundRect(
-                new RectF(Math.round(left), Math.round(top), Math.round(right), Math.round(bottom)),
-                style.cornerRadius, style.cornerRadius, style.barBorderPaint);
     }
 
 
