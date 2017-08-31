@@ -23,7 +23,7 @@ And here is the [javadoc][6].
 ``` groovy
    TODO()
 ```
-In order to use this forked version, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
+    In order to use this forked version, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
 
 If you find this library useful and decide to use it in your projects please drop me a line [@dfbernardino][6], I will be happy to know about it.
 
