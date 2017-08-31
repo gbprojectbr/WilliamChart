@@ -59,9 +59,34 @@ This version was modified to:
     
 ### Gradle Forked Version
 
-``` groovy
-   TODO()
-```
+Put on Project level gradle.properties:
+
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0'
+    }
+
+    allprojects {
+        repositories {
+            maven { url 'https://gbartifactory.artifactoryonline.com/gbartifactory' }
+        }
+	}
+
+And on application level gradle.properties:
+
+    dependencies {
+        implementation 'br.com.guiabolso:williamchart:2.5.0'
+   	 }
+   	
+   	 artifactory {
+         contextUrl = 'https://gbartifactory.artifactoryonline.com/gbartifactory/'
+         resolve {
+             repository {
+                 repoKey = 'gbartifacts'
+                 username = "${artifactory_user}"
+                 password = "${artifactory_password}"
+             }
+         }
+     }
 
 In order to use this forked version directly from artifactory, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
 

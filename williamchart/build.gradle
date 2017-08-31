@@ -98,7 +98,7 @@ bintray {
     }
 }
 
-def packageName = 'com.diogobernardino'
+def packageName = 'br.com.guiabolso'
 
 publishing {
     publications {
