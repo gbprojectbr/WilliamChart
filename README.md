@@ -19,12 +19,6 @@ And here is the [javadoc][6].
    compile 'com.diogobernardino:williamchart:2.5.0'
 ```
 
-### Forked Gradle Version
-``` groovy
-   TODO()
-```
-In order to use this forked version, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
-
 If you find this library useful and decide to use it in your projects please drop me a line [@dfbernardino][6], I will be happy to know about it.
 
 ![gif1][1]
@@ -54,6 +48,25 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+
+About this forked version
+-----
+
+This version was modified to:
+
+* Prevent rounded corners in the bottom of the stacked bars
+* Allow every section of a stacked bar to have your own border color.
+    
+### Gradle Forked Version
+
+``` groovy
+   TODO()
+```
+
+In order to use this forked version directly from artifactory, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
+
+    artifactory_user=ARTIFACTORY_USER
+    artifactory_password=ARTIFACTORY_PASSWORD
 
 
 [1]: ./art/2.3.0-1.gif
