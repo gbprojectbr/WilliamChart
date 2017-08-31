@@ -75,9 +75,9 @@ And on application level gradle.properties:
 
     dependencies {
         implementation 'br.com.guiabolso:williamchart:2.5.0'
-   	 }
+    }
    	
-   	 artifactory {
+    artifactory {
          contextUrl = 'https://gbartifactory.artifactoryonline.com/gbartifactory/'
          resolve {
              repository {
