@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('checkstyle.gradle')
+// For internal use
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 
 version = '2.5.0'
 group = 'com.diogobernardino'
@@ -80,18 +83,46 @@ artifacts {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+def packageName = 'com.diogobernardino:williamchart'
+
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
         repo = 'maven'
-        name = 'com.diogobernardino:williamchart'
+        name = packageName
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
         override = true
+    }
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId packageName
+            version = project.version
+            artifactId = project.getName()
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://gbartifactory.artifactoryonline.com/gbartifactory/'
+    publish {
+        repository {
+            repoKey = 'gbartifacts'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+        defaults {
+            publications('aar')
+            publishArtifacts = true
+        }
     }
 }
 

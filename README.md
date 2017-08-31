@@ -1,3 +1,6 @@
+# TO USE THIS FORKED LIBRARY, YOU NEED TO PUT ARTIFACTORY CREDENTIALS AT YOUR USER_HOME/.gradle/gradle.properties
+
+
 # williamchart ![phone][7]![watch][8]
 
 Williamchart is an Android Library to help the implementation of charts in android applications. For the ones that would like to contribute, my idea is not only to implement the conventional chart features but instead something that could be pleasant and intuitive while representing and visualizing data. I would prefer to keep charts simple and clean rather than overfeatured.
