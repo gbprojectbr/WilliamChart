@@ -187,4 +187,10 @@ public abstract class BaseStackBarChartView extends BaseBarChartView {
         return super.setAxisBorderValues(minValue, maxValue, step);
     }
 
+    @Override
+    public ChartView setAxisBorderValues(float minValue, float maxValue) {
+
+        mCalcMaxValue = false;
+        return super.setAxisBorderValues(minValue, maxValue, this.getStep());
+    }
 }

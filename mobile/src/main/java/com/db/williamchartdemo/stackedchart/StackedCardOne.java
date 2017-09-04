@@ -143,6 +143,7 @@ public class StackedCardOne extends CardController {
         mChart.setXLabels(XRenderer.LabelPosition.OUTSIDE)
                 .setYLabels(YRenderer.LabelPosition.NONE)
                 .setValueThreshold(threshold, threshold, thresPaint)
+                .setAxisBorderValues(0f, 200f, 1f)
                 .show(new Animation().inSequence(.5f, order).withEndAction(action));
     }
 
