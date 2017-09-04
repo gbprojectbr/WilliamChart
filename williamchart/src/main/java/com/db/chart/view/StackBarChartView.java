@@ -234,7 +234,9 @@ public class StackBarChartView extends BaseStackBarChartView {
         path.arcTo(topRightRect, 270, 90);
         path.lineTo((int) x1, (int) y0);
         if (drawOnBottom) {
-            path.lineTo((int) x0, (int) y0);
+            float strokeWidth = style.barBorderPaint.getStrokeWidth();
+            path.lineTo((int) x1, (int) y0 - (strokeWidth / 2));
+            path.lineTo((int) x0, (int) y0 - (strokeWidth / 2));
         }
         canvas.drawPath(path, style.barBorderPaint);
     }
