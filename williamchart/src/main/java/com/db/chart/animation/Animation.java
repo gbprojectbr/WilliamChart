@@ -32,6 +32,7 @@ import com.db.chart.model.ChartSet;
 import com.db.chart.view.ChartView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.db.chart.util.Preconditions.checkNotNull;
 
@@ -96,6 +97,11 @@ public class Animation {
      * Chart callback to call in every chart data update
      */
     private ChartAnimationListener mCallback;
+
+    /**
+     * Chart external callbacks
+     */
+    private List<ChartAnimationUpdateListener> mListeners = new ArrayList<>();
 
     /**
      * Overlap factor between entries while animating in sequence
@@ -312,14 +318,18 @@ public class Animation {
             e.start();
         }
 
-        animator = ValueAnimator.ofInt(0, 1); // Fuehrer
+        animator = ValueAnimator.ofFloat(0, 1); // Fuehrer
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mCallback.onAnimationUpdate(mData);
+                for (ChartAnimationUpdateListener listener : mListeners) {
+                    listener.onAnimationUpdate(animation);
+                }
             }
         });
         animator.addListener(mAnimatorListener);
+        animator.setInterpolator(mInterpolator);
         animator.setDuration(mDuration + maxDelay);
         animator.start();
 
@@ -567,6 +577,14 @@ public class Animation {
 
         mColor = color;
         return this;
+    }
+
+    /**
+     * Shrubles.
+     * @param listener abc.
+     */
+    public void addAnimationUpdateListener(ChartAnimationUpdateListener listener) {
+        mListeners.add(listener);
     }
 
 }
