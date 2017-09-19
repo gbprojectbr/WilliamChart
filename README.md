@@ -49,6 +49,50 @@ License
     limitations under the License.
 
 
+About this forked version
+-----
+
+This version was modified to:
+
+* Prevent rounded corners in the bottom of the stacked bars
+* Allow every section of a stacked bar to have your own border color.
+    
+### Gradle Forked Version
+
+Put on Project level gradle.properties:
+
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0'
+    }
+
+    allprojects {
+        repositories {
+            maven { url 'https://gbartifactory.artifactoryonline.com/gbartifactory' }
+        }
+	}
+
+And on application level gradle.properties:
+
+    dependencies {
+        implementation 'br.com.guiabolso:williamchart:2.5.0'
+    }
+   	
+    artifactory {
+         contextUrl = 'https://gbartifactory.artifactoryonline.com/gbartifactory/'
+         resolve {
+             repository {
+                 repoKey = 'gbartifacts'
+                 username = "${artifactory_user}"
+                 password = "${artifactory_password}"
+             }
+         }
+     }
+
+In order to use this forked version directly from artifactory, you need to put artifactory credentials at your ``USER_HOME/.gradle/gradle.properties``
+
+    artifactory_user=ARTIFACTORY_USER
+    artifactory_password=ARTIFACTORY_PASSWORD
+
 
 [1]: ./art/2.3.0-1.gif
 [2]: ./art/2.3.0-2.gif

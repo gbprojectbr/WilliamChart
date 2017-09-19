@@ -2,8 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('checkstyle.gradle')
+// For internal use
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 
-version = '2.5.0'
+version = '2.5.0.5'
 group = 'com.diogobernardino'
 
 android {
@@ -92,6 +95,34 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
         override = true
+    }
+}
+
+def packageName = 'br.com.guiabolso'
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId packageName
+            version = project.version
+            artifactId = project.getName()
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://gbartifactory.artifactoryonline.com/gbartifactory/'
+    publish {
+        repository {
+            repoKey = 'gbartifacts'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+        defaults {
+            publications('aar')
+            publishArtifacts = true
+        }
     }
 }
 

@@ -900,6 +900,28 @@ public abstract class ChartView extends RelativeLayout {
     }
 
     /**
+     * Returns the position of given value on Y Axis of the chart.
+     *
+     * @param value Value to discover the Y position.
+     * @return Y Axis position of given value on the chart.
+     */
+    public float getYPositionForValue(float value) {
+
+        return yRndr.parsePos(0, value);
+    }
+
+    /**
+     * Returns the position of given value on X Axis of the chart.
+     *
+     * @param value Value to discover the X position.
+     * @return X Axis position of given value on the chart.
+     */
+    public float getXPositionForValue(float value) {
+
+        return xRndr.parsePos(0, value);
+    }
+
+    /**
      * Get the step used between Y values.
      *
      * @return step
